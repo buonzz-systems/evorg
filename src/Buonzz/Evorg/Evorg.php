@@ -17,8 +17,8 @@ class Evorg {
         return $this;
 	}
 	
-    public function insert($element, $params) { 
-        return 'hello';            
+    public function insert($element, $params) {
+        return $this->repository->create($element, $params);         
 	}
         
     public function get() {                
