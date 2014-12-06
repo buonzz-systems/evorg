@@ -28,7 +28,10 @@ class EvorgServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		//
+		$this->app->bind('evorg', function(){
+			return new Evorg;
+		});
+		$this->app['config']->package('buonzz/evorg', __DIR__.'/../../../../../config');
 	}
 
 	/**
