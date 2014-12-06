@@ -35,6 +35,7 @@ edit app/config/packages/buonzz/evorg/config.php
 
 * app_id - is a unique number to identify your app
 * app_name - is the unique name of your app
+* logging - setting this to true makes a log file for evorg in app/storage/logs/evorg.log , good for troubleshooting
 * hosts - address of the elasticsearch servers (see http://www.elasticsearch.org/guide/en/elasticsearch/client/php-api/current/_configuration.html)
 
 
