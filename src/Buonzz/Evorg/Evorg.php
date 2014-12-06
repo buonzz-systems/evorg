@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Collection;
 
-class Tracking {	
+class Evorg {	
 	
     private $current_event;
     private $repository;
@@ -12,12 +12,13 @@ class Tracking {
         $this->repository = new EventRepository();
 	}
 
-	public static function event($event_name){    
+	public function event($event_name){    
         $this->current_event = $event_name;
         return $this;
 	}
 	
-    public function insert($element, $params) {             
+    public function insert($element, $params) { 
+        return 'hello';            
 	}
         
     public function get() {                
