@@ -53,3 +53,12 @@ Route::get('click', function()
 				);
 });
 ```
+
+Retrieve all click events
+
+```
+Route::get('all', function()
+{
+    return Evorg::event("click")->get();
+});
+```
