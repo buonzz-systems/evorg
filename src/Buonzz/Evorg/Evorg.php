@@ -18,6 +18,7 @@ class Evorg {
 	}
 	
     public function insert($element, $params) {
+        $params['element'] = $element;
         return $this->repository->create($this->current_event, $params);         
 	}
         
