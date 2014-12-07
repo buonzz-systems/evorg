@@ -1,6 +1,7 @@
 <?php namespace Buonzz\Evorg;
 
 use \Elasticsearch\Client;
+use Illuminate\Support\Collection;
 
 class EventRepository{
 
@@ -37,7 +38,9 @@ class EventRepository{
 		$params['index'] = 'events';
 		$params['type']  = $event_name;		
 
-		return $this->client->search($params);	
+		return $this->convert_to_collection(
+					$this->client->search($params)
+			);	
 	}
 
 	public function read(){
@@ -50,5 +53,22 @@ class EventRepository{
 
 	public function delete(){
 		
+	}
+
+	private function convert_to_collection($search_result){
+		
+		$data = $search_result->hits->hits;
+		
+		$tmp = array();
+
+		if(is_array($data))
+		{
+			foreach($data as $item)			
+				$tmp[] = $item->_source;
+		}
+		else
+			$tmp[] =  $data->_source;
+
+		return new Collection($tmp);
 	}
 }
