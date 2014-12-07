@@ -18,10 +18,11 @@ class Evorg {
 	}
 	
     public function insert($element, $params) {
-        return $this->repository->create($element, $params);         
+        return $this->repository->create($this->current_event, $params);         
 	}
         
-    public function get() {                
+    public function get() {
+        return $this->repository->get_all($this->current_event);                  
     }
     
     public function first() {            

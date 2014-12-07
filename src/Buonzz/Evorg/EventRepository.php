@@ -29,6 +29,17 @@ class EventRepository{
 		return $this->client->index($params);
 	}
 
+	public function get_all($event_name){
+
+		$params = array();
+
+		$params['body']['query']['matchAll']  = new \stdclass;
+		$params['index'] = 'events';
+		$params['type']  = $eventName;		
+
+		return $this->client->search($params);	
+	}
+
 	public function read(){
 		
 	}
