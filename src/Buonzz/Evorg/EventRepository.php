@@ -24,6 +24,10 @@ class EventRepository{
 		$params = array();
 
 		$params['body']  = $eventData;
+		
+		$params['body']['settings']['number_of_shards']  = \Config::get('evorg::number_of_shards');
+		$params['body']['settings']['number_of_replicas']  = \Config::get('evorg::number_of_replicas');		
+
 		$params['index'] = 'events';
 		$params['type']  = $eventName;		
 
@@ -59,7 +63,7 @@ class EventRepository{
 		
 		$data = $search_result['hits']['hits'];
         $tmp = array();
-        
+
         if(is_array($data))
         {
             foreach($data as $item)
