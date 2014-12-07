@@ -57,18 +57,21 @@ class EventRepository{
 
 	private function convert_to_collection($search_result){
 		
-		$data = $search_result->hits->hits;
-		
-		$tmp = array();
+		$data = $search_result['hits']['hits'];
+        $tmp = array();
+        
+        if(is_array($data))
+        {
+            foreach($data as $item)
+            {
+                    $cur_item = $item['_source'];
+                    $cur_item['id'] =  $item['_id'];
+                    $tmp[] = $cur_item;
+            }
+        }
+        else
+                $tmp[] =  $data['_source'];
 
-		if(is_array($data))
-		{
-			foreach($data as $item)			
-				$tmp[] = $item->_source;
-		}
-		else
-			$tmp[] =  $data->_source;
-
-		return new Collection($tmp);
+        return new Collection($tmp);
 	}
 }
