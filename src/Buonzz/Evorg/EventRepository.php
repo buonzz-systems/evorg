@@ -19,17 +19,9 @@ class EventRepository{
 		$this->client = new Client($params);
 	}
 
-	public function create($eventName, $eventData){	
+	public function create($eventName, $eventData){			
 		
-		$params = array();
-
-		$params['body']  = $eventData;
-		
-		$params['body']['settings']['number_of_shards']  = \Config::get('evorg::number_of_shards');
-		$params['body']['settings']['number_of_replicas']  = \Config::get('evorg::number_of_replicas');		
-
-		$params['index'] = 'events';
-		$params['type']  = $eventName;		
+		$params = $this->build_parameters($eventData, $eventName);
 
 		return $this->client->index($params);
 	}
@@ -77,5 +69,20 @@ class EventRepository{
                 $tmp[] =  $data['_source'];
 
         return new Collection($tmp);
+	}
+
+	private function build_parameters($eventData, $eventName){
+		
+		$params = array();
+
+		$params['body']  = $eventData;
+		
+		$params['body']['settings']['number_of_shards']  = \Config::get('evorg::number_of_shards');
+		$params['body']['settings']['number_of_replicas']  = \Config::get('evorg::number_of_replicas');		
+
+		$params['index'] = 'events';
+		$params['type']  = $eventName;		
+
+		return $params;
 	}
 }
