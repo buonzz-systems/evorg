@@ -35,7 +35,7 @@ class EventRepository{
 
 		$params['body']['query']['matchAll']  = new \stdclass;
 		$params['index'] = 'events';
-		$params['type']  = $eventName;		
+		$params['type']  = $event_name;		
 
 		return $this->client->search($params);	
 	}
