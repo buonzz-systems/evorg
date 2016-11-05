@@ -32,7 +32,7 @@ class EventRepository{
 	        'body' => $eventData
 	    ];
 
-		$response = $client->index($params);
+		$response = $this->client->index($params);
 
 	} // create
 
