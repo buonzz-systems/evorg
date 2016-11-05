@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 class EventRepository{
 
 	private $client;
+	private $idxbuilder;
 
 	public function __construct(){
 
@@ -19,12 +20,12 @@ class EventRepository{
                 ->setLogger($logger)
                 ->build();              // Build the client object
 
+   		$this->idxbuilder = new IndexNameBuilder();
 	}
 
 	public function create($eventName, $eventData){		
 
-		$idxbuilder = new IndexNameBuilder();
-		$indexname = $idxbuilder->build($eventName);
+		$indexname = $this->idxbuilder->build($eventName);
 
 		if(!isset($eventData['timestamp']))
 			$eventData['timestamp'] = date("c");
@@ -50,8 +51,12 @@ class EventRepository{
 		
 	}
 
-	public function delete(){
-		
+	public function delete($eventName){
+		$params = [
+				'index' => $this->idxbuilder->build($eventName)
+		];
+
+        $response = $this->client->indices()->delete($params);
 	}
 
 	private function convert_to_collection($search_result){

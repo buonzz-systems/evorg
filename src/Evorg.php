@@ -99,4 +99,8 @@ class Evorg {
     public function count() {
         
     }
+
+    public function delete($eventName){
+        $this->repository->delete($eventName);   
+    }
 }
