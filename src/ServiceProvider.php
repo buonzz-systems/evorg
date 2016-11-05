@@ -28,7 +28,9 @@ class ServiceProvider extends LaravelServiceProvider {
      */
     public function register() {
 
-        // Bind any implementations.
+        $this->app->bind('evorg', function(){
+            return new Evorg;
+        });
 
     }
 
