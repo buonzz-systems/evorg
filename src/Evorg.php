@@ -100,7 +100,7 @@ class Evorg {
         
     }
 
-    public function delete($eventName){
-        $this->repository->delete($eventName);   
+    public function delete(){
+        $this->repository->delete($this->current_event);   
     }
 }
