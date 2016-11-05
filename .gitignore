@@ -1,6 +1,0 @@
-.foundation
-*.tgz
-*.phar
-*.lock
-*tmp
-vendor/
