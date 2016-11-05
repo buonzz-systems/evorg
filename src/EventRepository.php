@@ -26,6 +26,9 @@ class EventRepository{
 		$idxbuilder = new IndexNameBuilder();
 		$indexname = $idxbuilder->build($eventName);
 
+		if(!isset($eventData['timestamp']))
+			$eventData['timestamp'] = date("c");
+
 		$params = [
 	        'index' => $indexname,
 	        'type' => $eventName,
