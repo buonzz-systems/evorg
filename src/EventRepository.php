@@ -1,42 +1,56 @@
 <?php namespace Buonzz\Evorg;
 
-use \Elasticsearch\Client;
+use Elasticsearch\ClientBuilder;
+use Monolog\Logger;
+
 use Illuminate\Support\Collection;
 
 class EventRepository{
+
 	private $client;
+
 	public function __construct(){
-		$hosts = \Config::get('evorg::hosts');		
-		
-		$params = array();		
-		$params['hosts'] = $hosts;		
-		$params['logging'] =\Config::get('evorg::logging');
-		$params['logPath'] = storage_path() .'/logs/evorg.log';
-		$this->client = new Client($params);
+
+		$hosts = \Config::get('evorg.hosts');		
+		$logger = ClientBuilder::defaultLogger( storage_path(). '/logs/elasticsearch.logs', Logger::INFO);
+
+    	$this->client = ClientBuilder::create()   // Instantiate a new ClientBuilder
+                ->setHosts($hosts)      // Set the hosts
+                ->setLogger($logger)
+                ->build();              // Build the client object
+
 	}
-	public function create($eventName, $eventData){			
-		
-		$params = $this->build_parameters($eventData, $eventName);
-		return $this->client->index($params);
-	}
+
+	public function create($eventName, $eventData){		
+
+		$idxbuilder = new IndexNameBuilder();
+		$indexname = $idxbuilder->build($eventName);
+
+		$params = [
+	        'index' => $indexname,
+	        'type' => $eventName,
+	        'body' => $eventData
+	    ];
+
+		$response = $client->index($params);
+
+	} // create
+
 	public function get_all($event_name){
-		$params = array();
-		$params['body']['query']['matchAll']  = new \stdclass;
-		$params['index'] = 'events';
-		$params['type']  = $event_name;		
-		return $this->convert_to_collection(
-					$this->client->search($params)
-			);	
 	}
+
 	public function read(){
 		
 	}
+
 	public function update(){
 		
 	}
+
 	public function delete(){
 		
 	}
+
 	private function convert_to_collection($search_result){
 		
 		$data = $search_result['hits']['hits'];
@@ -53,13 +67,5 @@ class EventRepository{
         else
                 $tmp[] =  $data['_source'];
         return new Collection($tmp);
-	}
-	private function build_parameters($eventData, $eventName){
-		
-		$params = array();
-		$params['body']  = $eventData;			
-		$params['index'] = 'events';
-		$params['type']  = $eventName;		
-		return $params;
 	}
 }
