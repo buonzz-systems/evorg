@@ -19,19 +19,23 @@ update composer by executing this in your project base folder
 
     composer update
 
-add the service provider in app/config/app.php in providers array
+add the service provider in config/app.php in providers array
 
-    'Buonzz\Evorg\EvorgServiceProvider',
+    'Buonzz\Evorg\ServiceProvider',
 
-add the Facade objects in app/config/app.php in aliases array
+add the alias in config/app.php in aliases array
 
-    'Evorg'   => 'Buonzz\Evorg\EvorgFacade'
+```
+        'Evorg'   => Buonzz\Evorg\EvorgFacade::class
+```
     
 publish the config settings
 
-    php artisan config:publish buonzz/evorg
+```
+php artisan vendor:publish
+```
 
-edit app/config/packages/buonzz/evorg/config.php
+edit config/evorg.php
 
 * app_id - is a unique number to identify your app
 * app_name - is the unique name of your app
