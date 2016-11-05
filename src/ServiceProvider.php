@@ -1,4 +1,4 @@
-<?php namespace Vendor\Package;
+<?php namespace Buonzz\Evorg;
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
@@ -19,10 +19,6 @@ class ServiceProvider extends LaravelServiceProvider {
     public function boot() {
 
         $this->handleConfigs();
-        // $this->handleMigrations();
-        // $this->handleViews();
-        // $this->handleTranslations();
-        // $this->handleRoutes();
     }
 
     /**
@@ -48,32 +44,11 @@ class ServiceProvider extends LaravelServiceProvider {
 
     private function handleConfigs() {
 
-        $configPath = __DIR__ . '/../config/packagename.php';
+        $configPath = __DIR__ . '/../config/evorg.php';
 
-        $this->publishes([$configPath => config_path('packagename.php')]);
+        $this->publishes([$configPath => config_path('evorg.php')]);
 
-        $this->mergeConfigFrom($configPath, 'packagename');
+        $this->mergeConfigFrom($configPath, 'evorg');
     }
 
-    private function handleTranslations() {
-
-        $this->loadTranslationsFrom(__DIR__.'/../lang', 'packagename');
-    }
-
-    private function handleViews() {
-
-        $this->loadViewsFrom(__DIR__.'/../views', 'packagename');
-
-        $this->publishes([__DIR__.'/../views' => base_path('resources/views/vendor/packagename')]);
-    }
-
-    private function handleMigrations() {
-
-        $this->publishes([__DIR__ . '/../migrations' => base_path('database/migrations')]);
-    }
-
-    private function handleRoutes() {
-
-        include __DIR__.'/../routes.php';
-    }
 }
