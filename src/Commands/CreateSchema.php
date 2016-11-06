@@ -42,6 +42,10 @@ class CreateSchema extends Command
     public function handle()
     {
         $this->info('Creating the Schema for the evorg events');
+        $this->info('<comment>Connecting to ES Server:</comment> ' . config('evorg.hosts')[0]);
+        $client = ClientBuilder::create() 
+                        ->setHosts(config('evorg.hosts'))
+                        ->build();
 
         foreach(config('evorg.event_schemas') as $event_schema=>$mappings)
         {
@@ -55,17 +59,14 @@ class CreateSchema extends Command
                     'number_of_shards' => config('evorg.number_of_shards'),
                     'number_of_replicas' => config('evorg.number_of_replicas')
                 ),
-                'mappings' => [ $event_schema => $mappings ]
+                'mappings' => [ $event_schema => [ 'properties' =>$mappings] ]
                 )
             );
 
-            $this->info('<comment>Connecting to ES Server:</comment> ' . config('evorg.hosts')[0]);
-            $client = ClientBuilder::create() 
-                            ->setHosts(config('evorg.hosts'))
-                            ->build();
-
-            $this->info('Building the schema');
+            $this->info('Building the schema: ' . $event_schema);
+            
             $client->indices()->create($mappings);
+            
             $this->info('Success!');
         }
     }
