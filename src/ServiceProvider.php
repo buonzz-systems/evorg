@@ -58,6 +58,6 @@ class ServiceProvider extends LaravelServiceProvider {
         $this->app->singleton('command.buonzz.evorg.create_schema', function($app) {
             return new \Buonzz\Evorg\Commands\CreateSchema();
         });
-        $this->commands('command.buonzz.evorg.createSchema');
+        $this->commands('command.buonzz.evorg.create_schema');
     }
 }
