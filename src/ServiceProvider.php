@@ -1,6 +1,7 @@
 <?php namespace Buonzz\Evorg;
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
+use Illuminate\Console\Scheduling\Schedule;
 
 class ServiceProvider extends LaravelServiceProvider {
 
@@ -19,6 +20,13 @@ class ServiceProvider extends LaravelServiceProvider {
     public function boot() {
 
         $this->handleConfigs();
+
+        // create the index for next month every 28th
+        $this->app->booted(function () {
+            $schedule = $this->app->make(Schedule::class);
+            $schedule->command('evorg:create_schema')->->monthlyOn(28, '1:00');;
+        });
+
     }
 
     /**

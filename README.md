@@ -42,6 +42,12 @@ edit config/evorg.php
 * logging - setting this to true makes a log file for evorg in app/storage/logs/evorg.log , good for troubleshooting
 * hosts - address of the elasticsearch servers (see http://www.elasticsearch.org/guide/en/elasticsearch/client/php-api/current/_configuration.html)
 
+NOTE: The application assumes that the Laravel Task scheduling cron entry is added in your crontab
+```
+* * * * * php /path/to/artisan schedule:run >> /dev/null 2>&1
+```
+if not, kindly do so, as its needed to perform background tasks that the package needs to do
+
 
 ### Usage
 
