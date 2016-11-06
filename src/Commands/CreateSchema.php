@@ -64,9 +64,14 @@ class CreateSchema extends Command
             );
 
             $this->info('Building the schema: ' . $event_schema);
-            
-            $client->indices()->create($mappings);
-            
+            try{
+                $client->indices()->create($mappings);
+            }
+            catch(Exception $e)
+            {
+                $this->error($e->getMessage());
+            }
+
             $this->info('Success!');
         }
     }
