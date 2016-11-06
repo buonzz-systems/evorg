@@ -46,7 +46,7 @@ class CreateSchema extends Command
         foreach(config('evorg.event_schemas') as $event_schema=>$mappings)
         {
 
-            $indexname =  $this->idxbuilder->build($event_schemas);
+            $indexname =  $this->idxbuilder->build($event_schema);
 
             $mappings = array(
             'index' =>  $indexname,
