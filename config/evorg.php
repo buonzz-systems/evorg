@@ -83,6 +83,21 @@ return [
 	*/
 
 	'event_schemas' =>[
-		'clicks' => ['timestamp' => 'date']
+		'clicks' => [ 
+            'timestamp' => ['type'=> 'date', 'index' => 'not_analyzed'],
+            'ip'=> ['type' => "ip"],
+            'user_agent' => ['type' => "string"],
+            'app_id' => ['type' => 'string', 'index' => 'not_analyzed'],
+            'app_name' => ['type' => 'string', 'index' => 'not_analyzed']
+         ],
+        'pageviews' => [ 
+            'timestamp' => ['type'=> 'date', 'index' => 'not_analyzed'],
+            'ip'=> ['type' => "ip"],
+            'user_agent' => ['type' => "string"],
+            'app_id' => ['type' => 'string', 'index' => 'not_analyzed'],
+            'app_name' => ['type' => 'string', 'index' => 'not_analyzed'],
+            'url' => ['type' => 'string', 'index' => 'not_analyzed'],
+
+         ]
 	]
 ];
