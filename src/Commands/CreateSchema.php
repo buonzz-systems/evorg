@@ -54,7 +54,7 @@ class CreateSchema extends Command
 
             $mappings = array(
             'index' =>  $indexname,
-            'client' => [ 'ignore' => 400 ]
+            'client' => [ 'ignore' => 400 ],
             'body' => array(
                 'settings' => array(
                     'number_of_shards' => config('evorg.number_of_shards'),
