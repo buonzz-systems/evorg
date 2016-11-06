@@ -24,7 +24,7 @@ class ServiceProvider extends LaravelServiceProvider {
         // create the index for next month every 28th
         $this->app->booted(function () {
             $schedule = $this->app->make(Schedule::class);
-            $schedule->command('evorg:create_schema')->->monthlyOn(28, '1:00');;
+            $schedule->command('evorg:create_schema')->monthlyOn(28, '1:00');
         });
 
     }
