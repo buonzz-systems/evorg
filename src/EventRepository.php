@@ -13,7 +13,7 @@ class EventRepository{
 	public function __construct(){
 
 		$hosts = \Config::get('evorg.hosts');		
-		$logger = ClientBuilder::defaultLogger( storage_path(). '/logs/evorg.logs', Logger::INFO);
+		$logger = ClientBuilder::defaultLogger( storage_path(). '/logs/evorg.log', Logger::INFO);
 
     	$this->client = ClientBuilder::create()   // Instantiate a new ClientBuilder
                 ->setHosts($hosts)      // Set the hosts
