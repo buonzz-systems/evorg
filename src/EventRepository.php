@@ -2,24 +2,15 @@
 
 use Elasticsearch\ClientBuilder;
 use Monolog\Logger;
+use Buonzz\Evorg\Jobs\SaveEvent;
 
 use Illuminate\Support\Collection;
 
 class EventRepository{
 
-	private $client;
 	private $idxbuilder;
 
 	public function __construct(){
-
-		$hosts = \Config::get('evorg.hosts');		
-		$logger = ClientBuilder::defaultLogger( storage_path(). '/logs/evorg.log', Logger::INFO);
-
-    	$this->client = ClientBuilder::create()   // Instantiate a new ClientBuilder
-                ->setHosts($hosts)      // Set the hosts
-                ->setLogger($logger)
-                ->build();              // Build the client object
-
    		$this->idxbuilder = new IndexNameBuilder();
 	}
 
@@ -30,13 +21,19 @@ class EventRepository{
 		if(!isset($eventData['timestamp']))
 			$eventData['timestamp'] = date("c");
 
+		if(!isset($eventData['ip']))
+			$eventData['ip'] = request()->ip();
+
+		if(!isset($eventData['user_agent']))
+			$eventData['user_agent'] = request()->header('User-Agent');
+
 		$params = [
-	        'index' => $indexname,
-	        'type' => $eventName,
-	        'body' => $eventData
+	        'indexname' => $indexname,
+	        'eventName' => $eventName,
+	        'eventData' => $eventData
 	    ];
 
-		$response = $this->client->index($params);
+	    dispatch( new SaveEvent($params));
 
 	} // create
 

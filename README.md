@@ -5,8 +5,7 @@ Scalable Events Database for Laravel
 
 ### Requirements
 
-* cURL
-* PHP >= 5.4.0
+* PHP >= 5.5.0
 * ElasticSearch Servers
 
 ### Installation
