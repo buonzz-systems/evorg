@@ -32,6 +32,7 @@ class ServiceProvider extends LaravelServiceProvider {
             return new Evorg;
         });
 
+        $this->register_commands();
     }
 
     /**
@@ -53,4 +54,10 @@ class ServiceProvider extends LaravelServiceProvider {
         $this->mergeConfigFrom($configPath, 'evorg');
     }
 
+    private function register_commands(){
+        $this->app->singleton('command.buonzz.evorg.create_schema', function($app) {
+            return new \Buonzz\Evorg\Commands\CreateSchema();
+        });
+        $this->commands('command.buonzz.evorg.createSchema');
+    }
 }
