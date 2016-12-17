@@ -14,18 +14,10 @@ class SaveEvent implements ShouldQueue
 {
     use InteractsWithQueue, Queueable, SerializesModels;
 
-    private $client;
     private $params;
 
     public function __construct($params)
     {
-        $hosts = \Config::get('evorg.hosts');       
-        $logger = ClientBuilder::defaultLogger( storage_path(). '/logs/evorg.log', Logger::INFO);
-
-        $this->client = ClientBuilder::create()   // Instantiate a new ClientBuilder
-                ->setHosts($hosts)      // Set the hosts
-                ->setLogger($logger)
-                ->build();              // Build the client object
         $this->params = $params;
     }
 
@@ -37,6 +29,14 @@ class SaveEvent implements ShouldQueue
             'body' => $this->params['eventData']
         ];
 
-        $response = $this->client->index($params);
+        $hosts = \Config::get('evorg.hosts');       
+        $logger = ClientBuilder::defaultLogger( storage_path(). '/logs/evorg.log', Logger::INFO);
+
+        $client = ClientBuilder::create()   // Instantiate a new ClientBuilder
+                ->setHosts($hosts)      // Set the hosts
+                ->setLogger($logger)
+                ->build();              // Build the client object
+
+        $response = $client->index($params);
     }
 }
