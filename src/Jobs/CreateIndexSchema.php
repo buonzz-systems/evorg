@@ -23,15 +23,15 @@ class CreateIndexSchema implements ShouldQueue
     public function handle()
     {
         $params = [
-            'index' => $this->params['indexname'],
+            'index' => $this->params['indexnames'],
             'mappings' => $this->params['mappings']
         ];
         $client = ClientFactory::getClient();
 
         try{
-                $client->indices()->create($mappings);
+                $client->indices()->create($params);
         }
-        catch(Exception $e){
+        catch(\Exception $e){
                 $this->error($e->getMessage());
         }
 
