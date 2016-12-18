@@ -67,5 +67,11 @@ class ServiceProvider extends LaravelServiceProvider {
             return new \Buonzz\Evorg\Commands\CreateSchema();
         });
         $this->commands('command.buonzz.evorg.create_schema');
+
+       $this->app->singleton('command.buonzz.evorg.reset', function($app) {
+            return new \Buonzz\Evorg\Commands\ResetCommand();
+        });
+        $this->commands('command.buonzz.evorg.reset');
+
     }
 }
