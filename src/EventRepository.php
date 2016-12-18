@@ -4,13 +4,16 @@
 use Buonzz\Evorg\Jobs\SaveEvent;
 use Buonzz\Evorg\Indices\IndexNameBuilder;
 use Illuminate\Support\Collection;
+use Jenssegers\Agent\Agent;
 
 class EventRepository{
 
 	private $idxbuilder;
+	private $agent;
 
 	public function __construct(){
    		$this->idxbuilder = new IndexNameBuilder();
+   		$this->agent = new Agent();
 	}
 
 	public function create($eventName, $eventData){		
@@ -32,7 +35,9 @@ class EventRepository{
 	        'eventData' => $eventData
 	    ];
 
-	    dispatch( new SaveEvent($params));
+	    // dont record event if robot
+	    if(!$agent->isRobot())
+	    	dispatch( new SaveEvent($params));
 
 	} // create
 

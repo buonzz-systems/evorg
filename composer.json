@@ -9,7 +9,8 @@
     ],
     "require": {
         "php": ">=5.5.0",
-         "elasticsearch/elasticsearch": "2.*"
+         "elasticsearch/elasticsearch": "2.*",
+        "jenssegers/agent": "^2.4"
     },
     "autoload": {
         "psr-4": {
