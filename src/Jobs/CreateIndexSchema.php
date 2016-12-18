@@ -32,7 +32,7 @@ class CreateIndexSchema implements ShouldQueue
                 $client->indices()->create($params);
         }
         catch(\Exception $e){
-                $this->error($e->getMessage());
+                \Log::error($e->getMessage());
         }
 
     }
