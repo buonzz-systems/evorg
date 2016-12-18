@@ -36,7 +36,7 @@ class EventRepository{
 	    ];
 
 	    // dont record event if robot
-	    if(!$agent->isRobot())
+	    if(!$this->agent->isRobot())
 	    	dispatch( new SaveEvent($params));
 
 	} // create
