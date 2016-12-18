@@ -28,7 +28,7 @@ class EventDecorator{
 			elseif($this->agent->isMobile())
 				$eventData['device'] = 'mobile';
 			else
-				$eventData['device'] = 'Unknown Device'
+				$eventData['device'] = 'Unknown Device';
 		}
 
 		if(!isset($eventData['languages']))
