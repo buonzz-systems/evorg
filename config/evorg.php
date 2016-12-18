@@ -71,6 +71,37 @@ return [
     */
 	'hosts' => ['localhost'],
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | connection timetout to ES
+    |--------------------------------------------------------------------------
+    |
+    | how long curl should wait for the "connect" phase to finish.
+    */
+    'connect_timeout' => 2,
+
+    /*
+    |--------------------------------------------------------------------------
+    | query timetout to ES
+    |--------------------------------------------------------------------------
+    |
+    | how long curl should wait for the entire request to finish
+    */
+    'query_timeout' => 5,
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | how old the indices you want to query?
+    |--------------------------------------------------------------------------
+    |
+    | Each month a, a new index is being created. By default, querying operations
+    | only searches the current month, previous month and a month before the previous
+    | month. You can increase this value to query as much index you like.
+    */
+    'query_months' => 3,
+
     /*
     |--------------------------------------------------------------------------
     | The Event Schemas

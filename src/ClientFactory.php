@@ -9,7 +9,7 @@ class ClientFactory{
 
 	 public static function getClient(){
 
-        $hosts = \Config::get('evorg.hosts');       
+        $hosts = config('evorg.hosts');       
         $logger = ClientBuilder::defaultLogger( storage_path(). '/logs/evorg.log', Logger::INFO);
 
         $client = ClientBuilder::create()   // Instantiate a new ClientBuilder

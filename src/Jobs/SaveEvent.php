@@ -24,7 +24,11 @@ class SaveEvent implements ShouldQueue
         $params = [
             'index' => $this->params['indexname'],
             'type' => $this->params['eventName'],
-            'body' => $this->params['eventData']
+            'body' => $this->params['eventData'],
+            'client' => [
+                'timeout' => config('evorg.query_timeout') , 
+                'connect_timeout' => config('evorg.connect_timeout')
+            ]
         ];
 
         $client = ClientFactory::getClient();
