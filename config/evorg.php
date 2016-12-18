@@ -107,7 +107,7 @@ return [
     | The Event Schemas
     |--------------------------------------------------------------------------
     |
-    | Although you can virtuall insert anything in the eventData parameter when 
+    | Although you can virtually insert anything in the eventData parameter when 
     | inserting data. There are certain cases wherein you need to explicitly define
 	| the datatype of a certain field. Specially when you need to query it by its 
 	| exact value instead of doing a fuzzy searching.   

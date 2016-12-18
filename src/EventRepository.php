@@ -3,8 +3,11 @@
 
 use Buonzz\Evorg\Jobs\SaveEvent;
 use Buonzz\Evorg\Indices\IndexNameBuilder;
+use Buonzz\Evorg\Metrics\EventDecorator;
+
 use Illuminate\Support\Collection;
 use Jenssegers\Agent\Agent;
+
 
 class EventRepository{
 
@@ -20,14 +23,8 @@ class EventRepository{
 
 		$indexname = $this->idxbuilder->build($eventName);
 
-		if(!isset($eventData['timestamp']))
-			$eventData['timestamp'] = date("c");
-
-		if(!isset($eventData['ip']))
-			$eventData['ip'] = request()->ip();
-
-		if(!isset($eventData['user_agent']))
-			$eventData['user_agent'] = request()->header('User-Agent');
+		$decorator = new EventDecorator($eventData);
+		$eventData = $decorator->decorate();
 
 		$params = [
 	        'indexname' => $indexname,
