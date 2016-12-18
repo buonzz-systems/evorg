@@ -46,6 +46,11 @@ class EventDecorator{
 			$eventData['browser'] = $this->agent->browser();
 		}
 
+		if(!isset($eventData['session_id']))
+		{
+			$eventData['session_id'] = \Session::getId();
+		}
+
 		$this->data =  $eventData;
 	}
 
