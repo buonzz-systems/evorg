@@ -41,7 +41,7 @@ class ResetCommand extends Command
      */
     public function handle()
     {
-        $this->info('Creating the Schema for the evorg events');
+        $this->info('initiating..');
         $this->info('<comment>Connecting to ES Server:</comment> ' . config('evorg.hosts')[0]);
 
 
