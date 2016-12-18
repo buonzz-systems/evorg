@@ -29,13 +29,11 @@ class CreateSchema extends Command
      */
 
     private $idxbuilder;
-    private $mappingDecorator;
 
     public function __construct()
     {
         parent::__construct();
         $this->idxbuilder = new IndexNameBuilder;
-        $this->decorator = new SchemaMappingDecorator;
     }
     /**
      * Execute the console command.
@@ -51,7 +49,8 @@ class CreateSchema extends Command
         {
 
             $indexname =  $this->idxbuilder->build($event_schema);
-            $properties = $this->decorator($properties);
+            $decorator = new SchemaMappingDecorator($properties);
+            $properties = $decorator->decorate();
 
             $mappings = array(
             'index' =>  $indexname,
