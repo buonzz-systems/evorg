@@ -3,9 +3,8 @@
 namespace Buonzz\Evorg\Commands;
 
 use Illuminate\Console\Command;
-use Buonzz\Evorg\IndexNameBuilder;
-use Elasticsearch\ClientBuilder;
-use Monolog\Logger;
+use Buonzz\Evorg\Indices\IndexNameBuilder;
+use Buonzz\Evorg\ClientFactory;
 
 class CreateSchema extends Command
 {
@@ -43,9 +42,8 @@ class CreateSchema extends Command
     {
         $this->info('Creating the Schema for the evorg events');
         $this->info('<comment>Connecting to ES Server:</comment> ' . config('evorg.hosts')[0]);
-        $client = ClientBuilder::create() 
-                        ->setHosts(config('evorg.hosts'))
-                        ->build();
+
+        $client = ClientFactory::getClient();
 
         foreach(config('evorg.event_schemas') as $event_schema=>$mappings)
         {

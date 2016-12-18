@@ -1,4 +1,4 @@
-<?php namespace Buonzz\Evorg;
+<?php namespace Buonzz\Evorg\Indices;
 
 class IndexNameBuilder{
 

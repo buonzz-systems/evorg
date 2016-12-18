@@ -6,9 +6,10 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+use Elasticsearch\ClientBuilder;
 use Buonzz\Evorg\ClientFactory;
 
-class SaveEvent implements ShouldQueue
+class CreateIndexSchema implements ShouldQueue
 {
     use InteractsWithQueue, Queueable, SerializesModels;
 
@@ -26,7 +27,6 @@ class SaveEvent implements ShouldQueue
             'type' => $this->params['eventName'],
             'body' => $this->params['eventData']
         ];
-
         $client = ClientFactory::getClient();
         $response = $client->index($params);
     }
