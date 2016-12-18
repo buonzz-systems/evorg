@@ -58,7 +58,6 @@ class CreateSchema extends Command
 
             $mappings = array(
             'index' =>  $indexname,
-            'client' => [ 'ignore' => 400 ],
             'body' => array(
                 'settings' => array(
                     'number_of_shards' => config('evorg.number_of_shards'),
@@ -70,8 +69,8 @@ class CreateSchema extends Command
 
             $this->info('Building the schema: ' . $event_schema);
             dispatch( new CreateIndexSchema(['mappings' => $mappings]));
-
-            $this->info('Success!');
         }
+
+        $this->info('Done');
     }
 }
