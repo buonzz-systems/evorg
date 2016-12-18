@@ -12,7 +12,7 @@ class ClickSchema implements SchemaInterface {
 
 	public function getMappings(){
 
-		$mappings = ['element' => ["type => ""string",  "index" => "not_analyzed"]];
+		$mappings = ['element' => ["type" => "string",  "index" => "not_analyzed"]];
 
 		return $mappings;
 	}
