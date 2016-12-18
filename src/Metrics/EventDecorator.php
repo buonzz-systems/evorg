@@ -31,9 +31,9 @@ class EventDecorator{
 				$eventData['device'] = 'Unknown Device';
 		}
 
-		if(!isset($eventData['languages']))
+		if(!isset($eventData['language']))
 		{
-			$eventData['languages'] = $this->agent->languages();
+			$eventData['language'] = $this->agent->languages()[0];
 		}
 
 		if(!isset($eventData['platform']))
