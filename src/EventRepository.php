@@ -1,9 +1,8 @@
 <?php namespace Buonzz\Evorg;
 
-use Elasticsearch\ClientBuilder;
-use Monolog\Logger;
-use Buonzz\Evorg\Jobs\SaveEvent;
 
+use Buonzz\Evorg\Jobs\SaveEvent;
+use Buonzz\Evorg\Indices\IndexNameBuilder;
 use Illuminate\Support\Collection;
 
 class EventRepository{
