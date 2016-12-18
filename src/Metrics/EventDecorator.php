@@ -25,7 +25,7 @@ class EventDecorator{
 				$eventData['device'] = 'desktop';
 			elseif($this->agent->isTablet())
 				$eventData['device'] = 'tablet';
-			elseif($this->agent->isMobile()))
+			elseif($this->agent->isMobile())
 				$eventData['device'] = 'mobile';
 			else
 				$eventData['device'] = 'Unknown Device'
