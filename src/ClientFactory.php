@@ -10,12 +10,24 @@ class ClientFactory{
 	 public static function getClient(){
 
         $hosts = config('evorg.hosts');       
-        $logger = ClientBuilder::defaultLogger( storage_path(). '/logs/evorg.log', Logger::INFO);
+        $logging = config('evorg.logging');
 
-        $client = ClientBuilder::create()   // Instantiate a new ClientBuilder
-                ->setHosts($hosts)      // Set the hosts
-                ->setLogger($logger)
-                ->build();              // Build the client object
+        if($logging)
+		{ 
+       		$logger = ClientBuilder::defaultLogger( storage_path(). '/logs/evorg.log', Logger::INFO);
+        	$client = ClientBuilder::create()   // Instantiate a new ClientBuilder
+                	->setHosts($hosts)      // Set the hosts
+                	->setLogger($logger)
+                	->build();              // Build the client object
+		}
+		else
+		{
+        	$client = ClientBuilder::create()   // Instantiate a new ClientBuilder
+                	->setHosts($hosts)      // Set the hosts
+                	->build();              // Build the client object			
+		}
+
          return $client;
-	 }
-}
+	} // get client
+
+} // factory}
