@@ -45,7 +45,7 @@ class ResetCommand extends Command
         $this->info('<comment>Connecting to ES Server:</comment> ' . config('evorg.hosts')[0]);
 
 
-        if($this->confirm('Are you sure you want to delete all documents, indices and templates of your application? [y|n]'))
+        if($this->confirm('Are you sure you want to delete all documents, indices and templates of your application?'))
         {
 
             $client = ClientFactory::getClient();
@@ -55,16 +55,21 @@ class ResetCommand extends Command
 
                 $indexname =  $this->idxbuilder->build($event_schema);
 
-                try{
-                    $params = ['index' => $indexname];
-                    $response = $client->indices()->delete($params);
+                if($client->indices()->exists(['index' => $indexname]))
+                {
+                    try{
+                        $params = ['index' => $indexname];
+                        $response = $client->indices()->delete($params);
 
-                }catch(\Exception $e){ 
-                    $this->error($e->getMessage());
-                } 
-
-                 $this->info("Reset Success!");
+                    }catch(\Exception $e){ 
+                        $this->error($e->getMessage());
+                    } 
+                    $this->info( $indexname . " deleted"); 
+                }
+                else
+                    $this->info( $indexname . " doesnt exists, skipping");                    
             }
+            $this->info("Reset Success!");
         }
         else
             $this->info("Operation aborted");   
