@@ -50,9 +50,13 @@ class ResetCommand extends Command
 
             $client = ClientFactory::getClient();
 
-            foreach(config('evorg.event_schemas') as $event_schema=>$mappings)
+            foreach(config('evorg.event_schemas') as $schema_class)
             {
 
+                $cur_schema = new $schema_class;
+                $event_schema = $cur_schema->getEventName();
+                $properties = $cur_schema->getMappings();
+            
                 $indexname =  $this->idxbuilder->build($event_schema);
 
                 if($client->indices()->exists(['index' => $indexname]))
