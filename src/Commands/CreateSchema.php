@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Buonzz\Evorg\Indices\IndexNameBuilder;
 use Buonzz\Evorg\Jobs\CreateIndexSchema;
 use Buonzz\Evorg\ClientFactory;
+use Buonzz\Evorg\Indices\SchemaMappingDecorator;
 
 class CreateSchema extends Command
 {
@@ -28,11 +29,13 @@ class CreateSchema extends Command
      */
 
     private $idxbuilder;
+    private $mappingDecorator;
 
     public function __construct()
     {
         parent::__construct();
         $this->idxbuilder = new IndexNameBuilder;
+        $this->decorator = new SchemaMappingDecorator;
     }
     /**
      * Execute the console command.
@@ -44,10 +47,11 @@ class CreateSchema extends Command
         $this->info('Creating the Schema for the evorg events');
         $this->info('<comment>Connecting to ES Server:</comment> ' . config('evorg.hosts')[0]);
 
-        foreach(config('evorg.event_schemas') as $event_schema=>$mappings)
+        foreach(config('evorg.event_schemas') as $event_schema=>$properties)
         {
 
             $indexname =  $this->idxbuilder->build($event_schema);
+            $properties = $this->decorator($properties);
 
             $mappings = array(
             'index' =>  $indexname,
@@ -57,12 +61,12 @@ class CreateSchema extends Command
                     'number_of_shards' => config('evorg.number_of_shards'),
                     'number_of_replicas' => config('evorg.number_of_replicas')
                 ),
-                'mappings' => [ $event_schema => [ 'properties' =>$mappings] ]
+                'mappings' => [ $event_schema => [ 'properties' =>$properties] ]
                 )
             );
 
             $this->info('Building the schema: ' . $event_schema);
-            dispatch( new CreateIndexSchema());
+            dispatch( new CreateIndexSchema([$indexname, $mappings]));
 
             $this->info('Success!');
         }

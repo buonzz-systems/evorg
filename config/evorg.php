@@ -114,21 +114,7 @@ return [
 	*/
 
 	'event_schemas' =>[
-		'click' => [ 
-            'timestamp' => ['type'=> 'date', 'index' => 'not_analyzed'],
-            'ip'=> ['type' => "ip"],
-            'user_agent' => ['type' => "string"],
-            'app_id' => ['type' => 'string', 'index' => 'not_analyzed'],
-            'app_name' => ['type' => 'string', 'index' => 'not_analyzed'],
-            'element' => ['type' => 'string', 'index' => 'not_analyzed']
-         ],
-        'pageview' => [ 
-            'timestamp' => ['type'=> 'date', 'index' => 'not_analyzed'],
-            'ip'=> ['type' => "ip"],
-            'user_agent' => ['type' => "string"],
-            'app_id' => ['type' => 'string', 'index' => 'not_analyzed'],
-            'app_name' => ['type' => 'string', 'index' => 'not_analyzed'],
-            'element' => ['type' => 'string', 'index' => 'not_analyzed']
-         ]
+		'click' => [],
+        'pageview' => []
 	]
 ];

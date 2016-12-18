@@ -8,6 +8,7 @@ class EventDecorator{
 	private $agent;
 
 	public function __construct($eventData){
+
    		$this->agent = new Agent();
 
 		if(!isset($eventData['timestamp']))
@@ -15,6 +16,13 @@ class EventDecorator{
 
 		if(!isset($eventData['ip']))
 			$eventData['ip'] = request()->ip();
+
+		if(!isset($eventData['app_id']))
+			$eventData['app_id'] = config('evorg.app_id');
+
+		if(!isset($eventData['app_name']))
+			$eventData['app_name'] = config('evorg.app_name');
+
 
 		if(!isset($eventData['user_agent']))
 			$eventData['user_agent'] = request()->header('User-Agent');
