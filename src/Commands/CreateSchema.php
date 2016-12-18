@@ -45,8 +45,12 @@ class CreateSchema extends Command
         $this->info('Creating the Schema for the evorg events');
         $this->info('<comment>Connecting to ES Server:</comment> ' . config('evorg.hosts')[0]);
 
-        foreach(config('evorg.event_schemas') as $event_schema=>$properties)
+        foreach(config('evorg.event_schemas') as $schema_class)
         {
+
+            $cur_schema = new $schema_class;
+            $event_schema = $cur_schema->getEventName();
+            $properties = $cur_schema->getMappings();
 
             $indexname =  $this->idxbuilder->build($event_schema);
             $decorator = new SchemaMappingDecorator($properties);

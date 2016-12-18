@@ -114,7 +114,9 @@ return [
 	*/
 
 	'event_schemas' =>[
-		'click' => [],
-        'pageview' => []
+
+		Buonzz\Evorg\Schemas\ClickSchema::class,
+        Buonzz\Evorg\Schemas\ImpressionSchema::class,
+        // end of built-in schemas, add yours below
 	]
 ];
