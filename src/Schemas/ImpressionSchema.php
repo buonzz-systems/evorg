@@ -12,7 +12,7 @@ class ImpressionSchema implements SchemaInterface {
 
 	public function getMappings(){
 
-		$mappings = ['element' => ["string", "not_analyzed"]];
+		$mappings = ['element' => ["type" => "string", "index" => "not_analyzed"]];
 
 		return $mappings;
 	}
