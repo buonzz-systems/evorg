@@ -62,7 +62,7 @@ class CreateSchema extends Command
             );
 
             $this->info('Building the schema: ' . $event_schema);
-            dispatch( new CreateIndexSchema();
+            dispatch( new CreateIndexSchema());
 
             $this->info('Success!');
         }
