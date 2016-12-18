@@ -7,7 +7,7 @@ use Buonzz\Evorg\Indices\IndexNameBuilder;
 use Buonzz\Evorg\Jobs\CreateIndexSchema;
 use Buonzz\Evorg\ClientFactory;
 
-class ResetSchema extends Command
+class ResetCommand extends Command
 {
     /**
      * The name and signature of the console command.
