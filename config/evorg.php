@@ -117,6 +117,7 @@ return [
 
 		Buonzz\Evorg\Schemas\ClickSchema::class,
         Buonzz\Evorg\Schemas\ImpressionSchema::class,
+        Buonzz\Evorg\Schemas\PageviewSchema::class,
         // end of built-in schemas, add yours below
 	]
 ];

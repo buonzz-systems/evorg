@@ -31,7 +31,13 @@ class SaveEvent implements ShouldQueue
             ]
         ];
 
-        $client = ClientFactory::getClient();
-        $response = $client->index($params);
+        try{
+        
+            $client = ClientFactory::getClient();        
+            $response = $client->index($params);
+        }
+        catch(\Exception $e){
+            \Log::error('Save Event: ' . $e->getMessage(););
+        }
     }
 }
