@@ -4,7 +4,10 @@ namespace Buonzz\Evorg\Commands;
 
 use Illuminate\Console\Command;
 use Buonzz\Evorg\Indices\IndexNameBuilder;
+
 use Buonzz\Evorg\Jobs\CreateIndexSchema;
+use Buonzz\Evorg\Jobs\CreateIndexTemplate;
+
 use Buonzz\Evorg\ClientFactory;
 use Buonzz\Evorg\Indices\SchemaMappingDecorator;
 
