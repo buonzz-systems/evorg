@@ -29,7 +29,7 @@ class CreateIndexTemplate implements ShouldQueue
         unset($params['index']);
 
         // strip off the dates
-        $template_name = substr($string, 0, -7);
+        $template_name = substr($template_name, 0, -7);
 
         $params['name'] = 'evorg-' . md5($template_name);
         $params['body']['template'] = $template_name . "*";
