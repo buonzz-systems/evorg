@@ -76,6 +76,7 @@ class CreateSchema extends Command
             {
                 $this->info('Building the schema: ' . $indexname);
                 dispatch( new CreateIndexSchema(['mappings' => $mappings]));
+                dispatch( new CreateIndexTemplate(['mappings' => $mappings]));
             }
         }
 
