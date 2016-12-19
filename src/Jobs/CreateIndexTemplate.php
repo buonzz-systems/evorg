@@ -31,7 +31,7 @@ class CreateIndexTemplate implements ShouldQueue
         // strip off the dates
         $template_name = substr($string, 0, -7);
 
-        $params['name'] => 'evorg-' . md5($template_name);
+        $params['name'] = 'evorg-' . md5($template_name);
         $params['body']['template'] = $template_name . "*";
 
         $client = ClientFactory::getClient();
