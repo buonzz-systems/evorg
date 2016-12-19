@@ -37,7 +37,7 @@ class SaveEvent implements ShouldQueue
             $response = $client->index($params);
         }
         catch(\Exception $e){
-            \Log::error('Save Event: ' . $e->getMessage(););
+            \Log::error('Save Event: ' . $e->getMessage());
         }
     }
 }
