@@ -56,6 +56,8 @@ class CreateSchema extends Command
             $decorator = new SchemaMappingDecorator($properties);
             $properties = $decorator->decorate();
 
+            $client = ClientFactory::getClient();
+
             $mappings = array(
             'index' =>  $indexname,
             'body' => array(
@@ -67,8 +69,14 @@ class CreateSchema extends Command
                 )
             );
 
-            $this->info('Building the schema: ' . $event_schema);
-            dispatch( new CreateIndexSchema(['mappings' => $mappings]));
+
+            if($client->indices()->exists(['index' => $indexname]))
+                $this->info( $indexname . ' already exists. no need to create');
+            else
+            {
+                $this->info('Building the schema: ' . $indexname);
+                dispatch( new CreateIndexSchema(['mappings' => $mappings]));
+            }
         }
 
         $this->info('Done');
