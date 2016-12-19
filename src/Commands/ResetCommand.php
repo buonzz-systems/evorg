@@ -74,6 +74,9 @@ class ResetCommand extends Command
                     $this->info( $indexname . " doesnt exists, skipping");                    
             }
             $this->info("Reset Success!");
+
+            $this->call('evorg:create_schema');
+
         }
         else
             $this->info("Operation aborted");   
