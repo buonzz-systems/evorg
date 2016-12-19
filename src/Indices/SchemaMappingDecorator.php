@@ -11,7 +11,7 @@ class SchemaMappingDecorator{
 			$mapping['timestamp'] = ['type'=> 'date', 'index' => 'not_analyzed'];
 
 		if(!isset($mapping['ip']))
-			$mapping['ip'] = ['type' => "ip"];
+			$mapping['ip'] = ['type' => "string", 'index' => "not_analyzed"];
 
 		if(!isset($mapping['user_agent']))
 			$mapping['user_agent'] = ['type' => "string"];
